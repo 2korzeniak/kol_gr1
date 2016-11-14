@@ -1,24 +1,21 @@
 import random
 import time
+from plane import Plane
 
 class Symulator(object):
     """Flight simulator class"""
     def __init__(self, angle):
-        self.angle = angle    
-	
-    def error_gauss(self,x,y):
-        """Gauss error"""
-        return random.gauss(x,y) 
-        
-    def adjustment(self):
-		"""Angle adjustmentment"""
-		return self.angle/2.0    
-	
+        self.plane = Plane(angle)
+    	
     def run(self): 
         """Runs simulation"""
         while True:
-            self.angle = self.angle - self.adjustment() + self.error_gauss(0,1)		
-            print "Current angle: " + str(self.angle)
-            print "Applied correction: " + str(self.adjustment())
+            self.plane.angle = self.plane.angle - self.plane.adjustment() + self.plane.error_gauss(0,1)		
+            print "Current angle: " + str(self.plane.angle)
+            print "Applied correction: " + str(self.plane.adjustment())
             print "\n"
             time.sleep(1)
+            
+if __name__ == "__main__":
+    simul = Symulator(0)
+    simul.run()
